@@ -7,38 +7,32 @@ import java.util.List;
 import fr.eni.enienchere.bo.Utilisateur;
 import fr.eni.enienchere.dal.DAOFactory;
 import fr.eni.enienchere.dal.UtilisateurDAO;
-import fr.eni.enienchere.dal.UtilisateurDAOJdbcImpl;
 
 public class UtilisateurManager {
 	
-	private static UtilisateurDAO utilisateurDAO;
-	private static BusinessException businessException;
+	private  UtilisateurDAO utilisateurDAO;
 
-    static {
-        UtilisateurManager.utilisateurDAO = new UtilisateurDAOJdbcImpl();
-        UtilisateurManager.businessException = new BusinessException();
+	public UtilisateurManager(){
+        this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
     }
     
-    public static Utilisateur inscriptionUtilisateur(final Utilisateur utilisateur) throws BusinessException, SQLException {
-        if (!UtilisateurManager.businessException.hasErreurs()) {
-            UtilisateurManager.utilisateurDAO.insert(utilisateur);
+    public Utilisateur inscriptionUtilisateur(final Utilisateur utilisateur) throws BusinessException, SQLException {
+		BusinessException businessException = new BusinessException();
+    	if (!businessException.hasErreurs()) {
+            this.utilisateurDAO.insert(utilisateur);
             return utilisateur;
         }
-        throw UtilisateurManager.businessException;
+        throw businessException;
     }
     
-    public static List<String> listAllPseudos() throws BusinessException {
-        return UtilisateurManager.utilisateurDAO.getAllPseudos();
+    public List<String> listAllPseudos() throws BusinessException {
+        return this.utilisateurDAO.getAllPseudos();
     }
 
-	
-	public UtilisateurManager() {
-		UtilisateurManager.utilisateurDAO=DAOFactory.getUtilisateurDAO();
-	}
 	
 
 	public Utilisateur selectionnerUtilisateur(String pseudo) throws BusinessException {
-		return UtilisateurManager.utilisateurDAO.selectUtilisateurByPseudo(pseudo);
+		return this.utilisateurDAO.selectUtilisateurByPseudo(pseudo);
 	}
 	
 	

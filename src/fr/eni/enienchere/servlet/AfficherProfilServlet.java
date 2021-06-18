@@ -134,7 +134,7 @@ public class AfficherProfilServlet extends HttpServlet {
 		////////////////////////////////////////////////
 	
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AfficherProfil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/afficherProfil.jsp");
 		rd.forward(request, response);
 	}
 

@@ -2,7 +2,7 @@ package fr.eni.enienchere.servlet;
 
 import java.util.List;
 import java.sql.SQLException;
-import fr.eni.enienchere.BusinessException;
+import fr.eni.enienchere.bll.BusinessException;
 import fr.eni.enienchere.bo.Utilisateur;
 import fr.eni.enienchere.bll.UtilisateurManager;
 import java.io.IOException;
@@ -26,7 +26,9 @@ public class ServletCreateCompte extends HttpServlet
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/createCompte.jsp");
+        UtilisateurManager utilisateurManager= new UtilisateurManager();
+    	
+    	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/createCompte.jsp");
         Utilisateur user = null;
         try {
             String pseudo = request.getParameter("pseudo");
@@ -40,7 +42,7 @@ public class ServletCreateCompte extends HttpServlet
             String motDePasse = request.getParameter("mdp");
             String confirmation = request.getParameter("mdpConf");
             
-            List<String> allPseudos = (List<String>)UtilisateurManager.listAllPseudos();
+            List<String> allPseudos = (List<String>)utilisateurManager.listAllPseudos();
             System.out.println(allPseudos);
             if (allPseudos.contains(pseudo)) {
                 request.setAttribute("allPseudos", allPseudos);
@@ -49,7 +51,7 @@ public class ServletCreateCompte extends HttpServlet
             }
             else if (confirmation.equals(motDePasse)) {
                 user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-                user = UtilisateurManager.inscriptionUtilisateur(user);
+                user = utilisateurManager.inscriptionUtilisateur(user);
 
             } 
             else if (!confirmation.equals(motDePasse) && (confirmation != null)){

@@ -52,13 +52,13 @@
   					<input type="email" id="email" name="email" value="${utilisateur.email}" maxlength="20"><br>
   					
   					<label for="telephone">Téléphone :</label>
-  					<input type="tel" id="telephone" name="telephone" value="${utilisateur.telephone}" maxlength="15"><br>
+  					<input type="tel" id="telephone" name="telephone" value="${utilisateur.telephone}" minlength="10" maxlength="15"><br>
   					
   					<label for="rue">Rue :</label>
   					<input type="text" id="rue" name="rue" value="${utilisateur.rue}" maxlength="30"><br>
   					
   					<label for="codePostal">Code postal :</label>
-  					<input type="text" id="codePostal" name="codePostal" value="${utilisateur.codePostal}" maxlength="10"><br>
+  					<input type="text" id="codePostal" name="codePostal" value="${utilisateur.codePostal}" minlength="5" maxlength="10"><br>
   					
   					<label for="ville">Ville :</label>
   					<input type="text" id="ville" name="ville" value="${utilisateur.ville}" maxlength="30"><br>
