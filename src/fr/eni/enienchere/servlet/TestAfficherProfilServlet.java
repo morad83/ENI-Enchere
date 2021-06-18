@@ -39,7 +39,7 @@ public class TestAfficherProfilServlet extends HttpServlet {
 		//definition noUtilisateurSession test
 		HttpSession session = request.getSession();
 		session.setAttribute("pseudoSession", "mo");
-		session.setMaxInactiveInterval(5);
+		session.setMaxInactiveInterval(50);
 		//
 
 		
