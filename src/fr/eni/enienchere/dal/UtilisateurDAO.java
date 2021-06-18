@@ -1,5 +1,6 @@
 package fr.eni.enienchere.dal;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.enienchere.bll.BusinessException;
@@ -13,5 +14,9 @@ public interface UtilisateurDAO {
 	public List<String> selectAllPseudo() throws BusinessException;
 
 	public void updateUtilisateur(Utilisateur utilisateur, String pseudo) throws BusinessException;
+	
+    public Utilisateur insert(final Utilisateur p0) throws BusinessException, SQLException;
+    
+    List<String> getAllPseudos() throws BusinessException;
 	
 }

@@ -1,23 +1,44 @@
 package fr.eni.enienchere.bll;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.enienchere.bo.Utilisateur;
 import fr.eni.enienchere.dal.DAOFactory;
 import fr.eni.enienchere.dal.UtilisateurDAO;
+import fr.eni.enienchere.dal.UtilisateurDAOJdbcImpl;
 
 public class UtilisateurManager {
 	
-	private UtilisateurDAO utilisateurDAO;
+	private static UtilisateurDAO utilisateurDAO;
+	private static BusinessException businessException;
+
+    static {
+        UtilisateurManager.utilisateurDAO = new UtilisateurDAOJdbcImpl();
+        UtilisateurManager.businessException = new BusinessException();
+    }
+    
+    public static Utilisateur inscriptionUtilisateur(final Utilisateur utilisateur) throws BusinessException, SQLException {
+        if (!UtilisateurManager.businessException.hasErreurs()) {
+            UtilisateurManager.utilisateurDAO.insert(utilisateur);
+            return utilisateur;
+        }
+        throw UtilisateurManager.businessException;
+    }
+    
+    public static List<String> listAllPseudos() throws BusinessException {
+        return UtilisateurManager.utilisateurDAO.getAllPseudos();
+    }
+
 	
 	public UtilisateurManager() {
-		this.utilisateurDAO=DAOFactory.getUtilisateurDAO();
+		UtilisateurManager.utilisateurDAO=DAOFactory.getUtilisateurDAO();
 	}
 	
 
 	public Utilisateur selectionnerUtilisateur(String pseudo) throws BusinessException {
-		return this.utilisateurDAO.selectUtilisateurByPseudo(pseudo);
+		return UtilisateurManager.utilisateurDAO.selectUtilisateurByPseudo(pseudo);
 	}
 	
 	
