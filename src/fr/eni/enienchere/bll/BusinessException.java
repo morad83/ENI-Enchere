@@ -31,9 +31,10 @@ public class BusinessException extends Exception {
 		{
 			this.listeCodesErreur.add(code);
 		}
-		for (int z: listeCodesErreur) {
-			System.out.println("bbll"+z);
-			}
+///////////////////////
+for (int z: listeCodesErreur) {
+	System.out.println("bll ajouter e"+z);
+}
 	}
 	
 	public boolean hasErreurs()

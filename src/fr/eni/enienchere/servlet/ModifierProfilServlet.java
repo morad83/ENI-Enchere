@@ -35,48 +35,22 @@ public class ModifierProfilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		
-		
-		//definition noUtilisateurSession test
 		HttpSession session = request.getSession();
-		session.setAttribute("pseudoSession", "momo");
-		session.setMaxInactiveInterval(50);
-		//
-		
-		
-		
-		
-		
-		
-		
+
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 			
 		List<Integer> listeCodesErreur=new ArrayList<>();
 		
 		String pseudo=null;
 		
-		
-		
 		pseudo = (String) session.getAttribute("pseudoSession");
 		
-		
-		//////////////////////////////////////////////
-			System.out.println("start pseudo="+pseudo);
-			///////////////////////////////////////
-			
+
 		if(pseudo==null || pseudo.trim().equals("")){ 
 			  listeCodesErreur.add(30010); 
-				
-				////////////////////////////////////////////
-			for (int z: listeCodesErreur) {
-				System.out.println("controle !session"+z);
-				}
-				/////////////////////////////////////////////
-		} 
+		}
 
 	
-
-		
 		if(listeCodesErreur.size()>0) {
 			request.setAttribute("listeCodesErreur",listeCodesErreur);
 		}
@@ -87,31 +61,14 @@ public class ModifierProfilServlet extends HttpServlet {
 				//insertion de l'objet
 				Utilisateur utilisateur=  utilisateurManager.selectionnerUtilisateur(pseudo);
 				request.setAttribute("utilisateur",utilisateur);
-				
-				
-				////////////////////////////////////////////////
-				System.out.println("insertion"+utilisateur.getPseudo());
-				////////////////////////////////////////////////
-				
-								
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-			
 			}
 		}
 		
-		
-		////////////////////////////////////////////////
-		for (int z: listeCodesErreur) { 
-			System.out.println("last servlet insertion"+z); 
-			}
-		////////////////////////////////////////////////
-
-
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
 		rd.forward(request, response);
-	
 }
 
 	/**
@@ -126,93 +83,70 @@ public class ModifierProfilServlet extends HttpServlet {
 			
 		List<Integer> listeCodesErreur=new ArrayList<>();		
 		
-		
 		Utilisateur utilisateur;
 		
 		Utilisateur utilisateurMaj;
 		
 		String pseudo;
-
-		String nom;
-		String prenom;
-		String email;
-		String telephone;
-		String rue;
-		String codePostal;
-		String ville;
-		String motDePasse;
-		String nouveaump;
-		String confirmation;
 		
+		String pseudoMaj;
+		String nomMaj;
+		String prenomMaj;
+		String emailMaj;
+		String telephoneMaj;
+		String rueMaj;
+		String codePostalMaj;
+		String villeMaj;
+		String motDePasseMaj;
+		String nouveaumpMaj;
+		String confirmationMaj;
 				
-		//controle session
 		pseudo = (String) session.getAttribute("pseudoSession");
-			//////////////////////////////////////////////
-			System.out.println("start pseudo="+pseudo);
-			///////////////////////////////////////
-		if(pseudo==null || pseudo.trim().equals("")){ 
-			  listeCodesErreur.add(30010); 
-			////////////////////////////////////////////
-			for (int z: listeCodesErreur) {
-				System.out.println("controle !session"+z);
-			}
-			/////////////////////////////////////////////
-		}
-		
-		
+//////////////////////////////////////////////
+System.out.println("serv start dopost modifierprofil");
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+System.out.println("serv controle session");
+/////////////////////////////////////////////		
+		//controle session//
+		if(pseudo==null || pseudo.trim().equals("")
+		){
+			  listeCodesErreur.add(30010);
+		}	
 		if(listeCodesErreur.size()>0) {
 			request.setAttribute("listeCodesErreur",listeCodesErreur);
 		}
-	
 		else {
-			///////////////////////
-			System.out.println("mode enregistrer");
-
-			//chemin/enregistrer
-			// construction utilsateur et utilisateurmaj
-			//construction utilisateur
-			try {
+			//chemin/enregistrer//
+			// construction utilsateur et utilisateurmaj//
+			//construction utilisateur//
+			try {				
 				utilisateur=  utilisateurManager.selectionnerUtilisateur(pseudo);
-				////////////////////////////////////////////////
-				System.out.println("recup attributs utilisateur"+utilisateur.getPseudo());
-				////////////////////////////////////////////////
-	
-				//construction utilisateurmaj
-				//recuperation des paramètres du formulaire
-				pseudo = request.getParameter("pseudo");
-				nom = request.getParameter("nom");
-				prenom = request.getParameter("prenom"); 
-				email = request.getParameter("email");
-				telephone = request.getParameter("telephone");
-				rue = request.getParameter("rue");
-				codePostal = request.getParameter("codePostal");
-				ville = request.getParameter("ville");
-				motDePasse = request.getParameter("motDePasse");
-				nouveaump = request.getParameter("nouveaump");
-				confirmation = request.getParameter("confirmation");
-				
-				utilisateurMaj= new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 
-			
+				//construction utilisateurmaj//
+				//recuperation des paramètres du formulaire//
+				pseudoMaj = request.getParameter("pseudo");
+				nomMaj = request.getParameter("nom");
+				prenomMaj = request.getParameter("prenom"); 
+				emailMaj = request.getParameter("email");
+				telephoneMaj = request.getParameter("telephone");
+				rueMaj = request.getParameter("rue");
+				codePostalMaj = request.getParameter("codePostal");
+				villeMaj = request.getParameter("ville");
+				motDePasseMaj = request.getParameter("motDePasse");
+				nouveaumpMaj = request.getParameter("nouveaump");
+				confirmationMaj = request.getParameter("confirmation");
 				
-				/////////////////////////////////////////////
-				System.out.println(request.getParameter("pseudo"));
-				System.out.println(utilisateur.getPseudo());
-				if(utilisateur.getPseudo().trim().equalsIgnoreCase(utilisateurMaj.getPseudo().trim())) {
-				System.out.println("=");
-				}
-				else {
-					System.out.println("!=");
-				}
-				System.out.println(telephone);
-				///////////////////////////////////////
-				
-			
-				
-				
-				
-				
-				
+				utilisateurMaj= new Utilisateur(pseudoMaj, nomMaj, prenomMaj, emailMaj, telephoneMaj, rueMaj, codePostalMaj, villeMaj, motDePasseMaj);
+////////////////////////////////////////////////
+System.out.println("fin serv recup attributs utilisateur et maj");
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+System.out.println("serv controle");
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+System.out.println("serv controle serv");
+////////////////////////////////////////////////
 				if(
 						utilisateur.getPseudo().trim().equalsIgnoreCase(utilisateurMaj.getPseudo().trim()) &
 						utilisateur.getNom().trim().equalsIgnoreCase(utilisateurMaj.getNom().trim()) &
@@ -222,54 +156,76 @@ public class ModifierProfilServlet extends HttpServlet {
 						utilisateur.getRue().trim().equalsIgnoreCase(utilisateurMaj.getRue().trim()) &
 						utilisateur.getCodePostal().trim().equalsIgnoreCase(utilisateurMaj.getCodePostal().trim()) &
 						utilisateur.getVille().trim().equalsIgnoreCase(utilisateurMaj.getVille().trim()) &
-						utilisateur.getMotDePasse().trim().equalsIgnoreCase(utilisateurMaj.getMotDePasse().trim()) 
+						utilisateur.getMotDePasse().trim().equalsIgnoreCase(utilisateurMaj.getMotDePasse().trim()) &
+						nouveaumpMaj.trim() =="" & confirmationMaj.trim()==""
 					){
 					  	listeCodesErreur.add(10012); 
-						////////////////////////////////////////////////
-						System.out.println("servErreurAucunChangement");
-						////////////////////////////////////////////////
+////////////////////////////////////////////////
+System.out.println("serv erreur controle serv (AucunChangement)");
+////////////////////////////////////////////////
 					}
-				
-				
-				//verif mp //verif mp 
-				if (!nouveaump.trim().equals(confirmation)) {
+				//verif nvmp//
+				if (!nouveaumpMaj.trim().equals(confirmationMaj)) {
 					listeCodesErreur.add(10015);
-					////////////////
-					System.out.println("erreurmp");
-					//////////////
+///////////////////////////////////
+System.out.println("serv erreur controle serv (serverreurmp)");
+/////////////////////////////////
 				}
-			
+////////////////////////////////////////////////
+System.out.println("fin serv controle serv");
+////////////////////////////////////////////////
 				if(listeCodesErreur.size()>0) {
 					request.setAttribute("listeCodesErreur",listeCodesErreur);
 				}
-			
 				else {
-					System.out.println("servletmngMajUtil");
+					try {
+////////////////////////////////////////
+System.out.println("serv controle mng");
+/////////////////////////////////////////////////////////
 					utilisateurManager.MAJUtilisateur(utilisateur, utilisateurMaj);
-					
-					/////////////////////////////////////////////
-					session.setAttribute("pseudoSession", utilisateurMaj.getPseudo());
-					//////////////////////////////////////////
-				
+//////////////////////////////////////////////
+System.out.println("fin serv controle mng");
+////////////////////////////////////////
+					} catch (BusinessException e) {
+////////////////////////////////////
+System.out.println("catch controle mng");
+//////////////////////////////////
+					e.printStackTrace();
+					request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
+					utilisateur=  utilisateurManager.selectionnerUtilisateur(pseudo);
+					request.setAttribute("utilisateur",utilisateur);
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
+					rd.forward(request, response);
+					}
 				} 
 			} catch (BusinessException e) {
-				///////////////////////////
-				System.out.println("catch");
-
+///////////////////////////
+System.out.println("catch");
+/////////////////////////////
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 			}
 		}
-		
-
-
-		////////////////////////////////////////////
-		System.out.println("endservlet ");
-		for (int z: listeCodesErreur) {
-			System.out.println("e "+z);
+		if(listeCodesErreur.size()>0) {
+			request.setAttribute("listeCodesErreur",listeCodesErreur);
+			try {
+				utilisateur=  utilisateurManager.selectionnerUtilisateur(pseudo);
+				request.setAttribute("utilisateur",utilisateur);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+////////////////////////////////////////////
+System.out.println("endservlet erreur ");
+///////////////////////////////////////////////
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
+			rd.forward(request, response);
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
-		rd.forward(request, response);
+		else {
+////////////////////////////////////////////
+System.out.println("endservlet success ");
+/////////////////////////////////////////////
+			RequestDispatcher rd = request.getRequestDispatcher("monProfil");
+			rd.forward(request, response);
+		}
 	}
 }

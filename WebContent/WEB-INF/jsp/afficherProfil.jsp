@@ -15,8 +15,6 @@
 	
 		<h1>ENI-Enchères</h1>
 	
-	
-
 			<c:choose>
 			<c:when test="${!empty listeCodesErreur}">
 		
@@ -55,7 +53,6 @@
 				</c:if>
 				<a href="${pageContext.request.contextPath}/TestAfficherProfilServlet">Retour à l'accueil</a>
 				
-		
 			</div>
 			</c:otherwise>
 			</c:choose>

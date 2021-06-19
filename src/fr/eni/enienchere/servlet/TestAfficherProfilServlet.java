@@ -36,38 +36,27 @@ public class TestAfficherProfilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//definition noUtilisateurSession test
+		//definition pseudoSession test
 		HttpSession session = request.getSession();
-		session.setAttribute("pseudoSession", "momo");
+		session.setAttribute("pseudoSession", "mo");
 		session.setMaxInactiveInterval(50);
 		//
-
 		
 		List<Utilisateur> listeUtilisateurs= new ArrayList<>();
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-
-
 		
 		try {
+			// definition de lien pseudo test
 			Utilisateur utilisateur1 = utilisateurManager.selectionnerUtilisateur("jo");
 			Utilisateur utilisateur2 = utilisateurManager.selectionnerUtilisateur("mo");
 			listeUtilisateurs.add(utilisateur1);
 			listeUtilisateurs.add(utilisateur2);
-
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		request.setAttribute("listeUtilisateurs", listeUtilisateurs);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/testAfficherProfilServlet.jsp");
 		rd.forward(request, response);
-
-		
-		
-		
-		
 	}
 
 	/**
