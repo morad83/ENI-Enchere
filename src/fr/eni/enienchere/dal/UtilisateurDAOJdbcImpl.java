@@ -24,13 +24,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String UPDATE_UTILISATEUR="update UTILISATEURS set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=? where pseudo=?";
 	
 	private static final String SELECT_IDS_UTILISATEUR_BY_PSEUDO = "select pseudo, mot_de_passe from UTILISATEURS where pseudo=?";
-<<<<<<< HEAD
-	
+
 	private static final String GETALLEMAIL = "SELECT email FROM UTILISATEURS;";
 	
-	private static final String DELETE = "DELETE UTILISATEURS WHERE no_utilisateur=?;";
-=======
->>>>>>> 0bb13890c803f7fbc83447ea3e3bd4c630086b3d
+	private static final String DELETE = "DELETE UTILISATEURS WHERE pseudo=?;";
+
 	
 	 @Override
 	    public Utilisateur insert(Utilisateur utilisateur) throws BusinessException, SQLException {
@@ -94,10 +92,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	    }
 
 	@Override
-	public void delete (int id) throws BusinessException {
+	public void delete (String pseudo) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
-			pstmt.setInt(1, id);
+			pstmt.setString(1, pseudo);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
             e.printStackTrace();
@@ -200,7 +198,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 	
 	@Override
-    public Utilisateur selectIdsUtilisateurByPseudo(String pseudoCo) throws BusinessException{
+    public Utilisateur selectIdsUtilisateurByPseudo(String pseudoCo) throws BusinessException {
 		Utilisateur utilisateurCoBd= new Utilisateur();
 		
 		try(Connection cnx = ConnectionProvider.getConnection())
@@ -222,9 +220,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return utilisateurCoBd;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 0bb13890c803f7fbc83447ea3e3bd4c630086b3d
 
 }

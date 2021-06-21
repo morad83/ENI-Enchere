@@ -83,7 +83,7 @@ public class SeConnecterServlet extends HttpServlet {
 			if(utilisateurManager.connexion(utilisateurCo)) {
 				//set session
 				session.setAttribute("pseudoSession", utilisateurCo.getPseudo());
-
+				//session.setMaxInactiveInterval(10);
 				//cookies?
 				if(souvenir!=null) {
 					Cookie cookiePseudo = new Cookie("cookieCoPseudoENITrocenchere",utilisateurCo.getPseudo()); 

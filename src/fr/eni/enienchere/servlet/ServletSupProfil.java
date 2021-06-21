@@ -1,6 +1,8 @@
 package fr.eni.enienchere.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,8 +36,9 @@ public class ServletSupProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/supUtilisateur.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/supUtilisateur.jsp");
         rd.forward((ServletRequest)request, (ServletResponse)response);
+
 	}
 
 	/**
@@ -43,13 +46,14 @@ public class ServletSupProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Utilisateur connectUtilisateur = (Utilisateur) session.getAttribute("connectUtilisateur");
+		String pseudoASup = (String) session.getAttribute("pseudoSession");
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
 			try {
-				UtilisateurManager.supUtilisateur(connectUtilisateur.getNoUtilisateur());
-				session.removeAttribute("connectUtilisateur");
+				utilisateurManager.supUtilisateur(pseudoASup);
+				session.removeAttribute("pseudoASup");
 				session.invalidate();
-				RequestDispatcher rd = request.getRequestDispatcher("/accueilDeco");
+				RequestDispatcher rd = request.getRequestDispatcher("/index");
 				rd.forward(request, response);			
 			} catch (Exception e) {
 				e.printStackTrace();

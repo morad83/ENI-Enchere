@@ -12,8 +12,6 @@ public class UtilisateurManager {
 	
 	private  UtilisateurDAO utilisateurDAO;
 	
-	private static UtilisateurDAO utilisateurDAOStatic;
-	
 	public UtilisateurManager(){
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
     }
@@ -145,12 +143,10 @@ System.out.println("end mng MAJutilisateur");
 	public Utilisateur recupererIds(String pseudoCo) throws BusinessException {
 		return this.utilisateurDAO.selectIdsUtilisateurByPseudo(pseudoCo);
 	}
-<<<<<<< HEAD
+
 	
-	public static void supUtilisateur (int id) throws BusinessException {
-		utilisateurDAOStatic.delete(id);
+	public void supUtilisateur (String pseudoASup) throws BusinessException {
+		this.utilisateurDAO.delete(pseudoASup);
 	}
-=======
->>>>>>> 0bb13890c803f7fbc83447ea3e3bd4c630086b3d
 	
 }
