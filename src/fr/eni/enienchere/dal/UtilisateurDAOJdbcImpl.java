@@ -24,10 +24,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String UPDATE_UTILISATEUR="update UTILISATEURS set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=? where pseudo=?";
 	
 	private static final String SELECT_IDS_UTILISATEUR_BY_PSEUDO = "select pseudo, mot_de_passe from UTILISATEURS where pseudo=?";
+<<<<<<< HEAD
 	
 	private static final String GETALLEMAIL = "SELECT email FROM UTILISATEURS;";
 	
 	private static final String DELETE = "DELETE UTILISATEURS WHERE no_utilisateur=?;";
+=======
+>>>>>>> 0bb13890c803f7fbc83447ea3e3bd4c630086b3d
 	
 	 @Override
 	    public Utilisateur insert(Utilisateur utilisateur) throws BusinessException, SQLException {
@@ -219,5 +222,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return utilisateurCoBd;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0bb13890c803f7fbc83447ea3e3bd4c630086b3d
 
 }

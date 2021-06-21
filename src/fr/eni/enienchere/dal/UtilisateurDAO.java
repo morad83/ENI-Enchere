@@ -17,7 +17,9 @@ public interface UtilisateurDAO {
 	
     public Utilisateur insert(final Utilisateur p0) throws BusinessException, SQLException;
     
-    List<String> getAllPseudos() throws BusinessException;
+    public List<String> getAllPseudos() throws BusinessException;
+    
+    public Utilisateur selectIdsUtilisateurByPseudo(String pseudoCo) throws BusinessException;
 	
     List<String> getAllEmail() throws BusinessException;
     

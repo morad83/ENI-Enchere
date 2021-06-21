@@ -15,8 +15,6 @@
 	
 		<h1>ENI-Enchères</h1>
 	
-	
-
 			<c:choose>
 			<c:when test="${!empty listeCodesErreur}">
 		
@@ -31,7 +29,7 @@
 		  			</ul>
 				</div>
 			
-				<a href="${pageContext.request.contextPath}/TestAfficherProfilServlet">Retour à l'accueil</a>
+				<a href="${pageContext.request.contextPath}/index">Retour à l'accueil</a>
 		
 			</div>
 			</c:when>
@@ -53,9 +51,8 @@
 				<c:if test="${utilisateur.pseudo == sessionScope.pseudoSession}">
 				<a href="${pageContext.request.contextPath}/modifierProfil">modifier</a>
 				</c:if>
-				<a href="${pageContext.request.contextPath}/TestAfficherProfilServlet">Retour à l'accueil</a>
+				<a href="${pageContext.request.contextPath}/index">Retour à l'accueil</a>
 				
-		
 			</div>
 			</c:otherwise>
 			</c:choose>
