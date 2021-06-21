@@ -43,6 +43,9 @@
 				<div class="input-field">
 					<label for="email">Email</label>
 					<input class="input" name="email" id="email" type="email" required>
+					<c:if test="${ allEmail.contains(email) }">
+						<p>email déjà utilisé, merci dans saisir un autre</p>
+					</c:if>
 				</div>
 				<div class="input-field">
 					<label for="tel">Téléphone</label>

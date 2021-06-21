@@ -77,8 +77,8 @@
   					
   					<input type="submit" value="Enregistrer">
   					
-  					<input type="button" value="Supprimer mon compte">
-				</form>
+  					<a href="<%=request.getContextPath() %>/supProfil"><button class="btn" type="button">Suppression compte</button></a>
+  				</form>
 					<a href="${pageContext.request.contextPath}/TestAfficherProfilServlet">Retour à l'accueil</a>
 			</div>
 			

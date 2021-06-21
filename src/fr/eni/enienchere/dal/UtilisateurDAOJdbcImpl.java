@@ -23,6 +23,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	private static final String UPDATE_UTILISATEUR="update UTILISATEURS set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=? where pseudo=?";
 	
+	private static final String SELECT_IDS_UTILISATEUR_BY_PSEUDO = "select pseudo, mot_de_passe from UTILISATEURS where pseudo=?";
+	
+	private static final String GETALLEMAIL = "SELECT email FROM UTILISATEURS;";
+	
+	private static final String DELETE = "DELETE UTILISATEURS WHERE no_utilisateur=?;";
 	
 	 @Override
 	    public Utilisateur insert(Utilisateur utilisateur) throws BusinessException, SQLException {
@@ -70,7 +75,36 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	        }
 	        return listPseudos;
 	    }
+	    
+	    public List<String> getAllEmail() throws BusinessException {
+	    	List<String> listEmail = new ArrayList<String>();
+	    		try (Connection cnx = ConnectionProvider.getConnection()) {
+	    			PreparedStatement pstmt = cnx.prepareStatement(GETALLEMAIL);
+	    			ResultSet rs = pstmt.executeQuery();
+	    				while (rs.next()) {
+	    					listEmail.add(rs.getString("email"));
+	    				}
+	    		} catch (Exception e) {
+	    			e.printStackTrace();
+	    		}
+	    		return listEmail;
+	    }
 
+	@Override
+	public void delete (int id) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+            e.printStackTrace();
+            final BusinessException businessException = new BusinessException();
+            businessException.ajouterErreur(Integer.valueOf(10002));
+            throw businessException;			
+		}
+	}
+	
+	
 	@Override
 	//NE retourne pas le noUtilisateur et l'admin
 	public Utilisateur selectUtilisateurByPseudo(String pseudo) throws BusinessException {
@@ -160,6 +194,30 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(10013);
 			throw businessException;
 		}
+	}
+	
+	@Override
+    public Utilisateur selectIdsUtilisateurByPseudo(String pseudoCo) throws BusinessException{
+		Utilisateur utilisateurCoBd= new Utilisateur();
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_IDS_UTILISATEUR_BY_PSEUDO);
+			pstmt.setString(1, pseudoCo);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				utilisateurCoBd.setPseudo(rs.getString("pseudo"));
+				utilisateurCoBd.setMotDePasse(rs.getString("mot_de_passe"));
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10014);
+			throw businessException;
+		}
+		return utilisateurCoBd;
 	}
 
 }

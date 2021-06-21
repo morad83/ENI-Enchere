@@ -43,11 +43,18 @@ public class ServletCreateCompte extends HttpServlet
             String confirmation = request.getParameter("mdpConf");
             
             List<String> allPseudos = (List<String>)utilisateurManager.listAllPseudos();
+            List<String> allEmail = (List<String>)utilisateurManager.listAllEMail();
             System.out.println(allPseudos);
+            System.out.println(allEmail);
             if (allPseudos.contains(pseudo)) {
                 request.setAttribute("allPseudos", allPseudos);
                 request.setAttribute("pseudo", pseudo);
                 rd.forward(request, response);
+            }
+            else if (allEmail.contains(email)) {
+            	request.setAttribute("allEmail", allEmail);
+            	request.setAttribute("email", email);
+            	rd.forward(request, response);
             }
             else if (confirmation.equals(motDePasse)) {
                 user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);

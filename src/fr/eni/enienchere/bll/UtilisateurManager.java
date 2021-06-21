@@ -11,7 +11,9 @@ import fr.eni.enienchere.dal.UtilisateurDAO;
 public class UtilisateurManager {
 	
 	private  UtilisateurDAO utilisateurDAO;
-
+	
+	private static UtilisateurDAO utilisateurDAOStatic;
+	
 	public UtilisateurManager(){
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
     }
@@ -27,6 +29,10 @@ public class UtilisateurManager {
     
     public List<String> listAllPseudos() throws BusinessException {
         return this.utilisateurDAO.getAllPseudos();
+    }
+    
+    public List<String> listAllEMail() throws BusinessException {
+    	return this.utilisateurDAO.getAllEmail();
     }
 
 	
@@ -110,5 +116,33 @@ public class UtilisateurManager {
 		return this.utilisateurDAO.selectAllPseudo();
 	}
 	
+	public Boolean connexion(Utilisateur utilisateurCo) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+
+		Utilisateur utilisateurCoBd = recupererIds(utilisateurCo.getPseudo());
+		//////////////////
+		System.out.println(utilisateurCo.getPseudo());
+		System.out.println(utilisateurCo.getMotDePasse());
+		System.out.println(utilisateurCo.getPseudo());
+		System.out.println(utilisateurCo.getMotDePasse());
+	
+		if(utilisateurCoBd.getPseudo().equals(utilisateurCo.getPseudo())
+			&& utilisateurCoBd.getMotDePasse().equals(utilisateurCo.getMotDePasse()) 
+			) {
+			return true;
+		}
+		else {
+		  	businessException.ajouterErreur(30024);
+			throw businessException;
+		}
+	}
+	
+	public Utilisateur recupererIds(String pseudoCo) throws BusinessException {
+		return this.utilisateurDAO.selectIdsUtilisateurByPseudo(pseudoCo);
+	}
+	
+	public static void supUtilisateur (int id) throws BusinessException {
+		utilisateurDAOStatic.delete(id);
+	}
 	
 }
