@@ -11,6 +11,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletResponse;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,9 @@ public class ServletCreateCompte extends HttpServlet
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UtilisateurManager utilisateurManager= new UtilisateurManager();
+    	HttpSession session = request.getSession();
+    	
+    	UtilisateurManager utilisateurManager= new UtilisateurManager();
     	
     	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/createCompte.jsp");
         Utilisateur user = null;
@@ -59,6 +62,13 @@ public class ServletCreateCompte extends HttpServlet
             else if (confirmation.equals(motDePasse)) {
                 user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
                 user = utilisateurManager.inscriptionUtilisateur(user);
+                
+                session.setAttribute("pseudoSession", pseudo);
+                
+                request.getRequestDispatcher("/index");
+                request.getRequestDispatcher("/index").forward(request, response);
+                
+                
 
             } 
             else if (!confirmation.equals(motDePasse) && (confirmation != null)){

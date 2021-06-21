@@ -176,6 +176,17 @@ System.out.println("fin serv controle serv");
 ////////////////////////////////////////////////
 				if(listeCodesErreur.size()>0) {
 					request.setAttribute("listeCodesErreur",listeCodesErreur);
+					try {
+						utilisateur=  utilisateurManager.selectionnerUtilisateur(pseudo);
+						request.setAttribute("utilisateur",utilisateur);
+					} catch (BusinessException e) {
+						e.printStackTrace();
+					}
+		////////////////////////////////////////////
+		System.out.println("endservlet erreur servlet");
+		///////////////////////////////////////////////
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
+					rd.forward(request, response);
 				}
 				else {
 					try {
@@ -184,8 +195,11 @@ System.out.println("serv controle mng");
 /////////////////////////////////////////////////////////
 					utilisateurManager.MAJUtilisateur(utilisateur, utilisateurMaj);
 //////////////////////////////////////////////
-System.out.println("fin serv controle mng");
+System.out.println("fin serv controle mng endservlet success");
 ////////////////////////////////////////
+					session.setAttribute("pseudoSession", pseudoMaj);
+					RequestDispatcher rd = request.getRequestDispatcher("/monProfil");
+					rd.forward(request, response);
 					} catch (BusinessException e) {
 ////////////////////////////////////
 System.out.println("catch controle mng");
@@ -200,32 +214,11 @@ System.out.println("catch controle mng");
 				} 
 			} catch (BusinessException e) {
 ///////////////////////////
-System.out.println("catch");
+System.out.println("catch try");
 /////////////////////////////
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 			}
-		}
-		if(listeCodesErreur.size()>0) {
-			request.setAttribute("listeCodesErreur",listeCodesErreur);
-			try {
-				utilisateur=  utilisateurManager.selectionnerUtilisateur(pseudo);
-				request.setAttribute("utilisateur",utilisateur);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			}
-////////////////////////////////////////////
-System.out.println("endservlet erreur ");
-///////////////////////////////////////////////
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
-			rd.forward(request, response);
-		}
-		else {
-////////////////////////////////////////////
-System.out.println("endservlet success ");
-/////////////////////////////////////////////
-			RequestDispatcher rd = request.getRequestDispatcher("monProfil");
-			rd.forward(request, response);
 		}
 	}
 }

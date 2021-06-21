@@ -77,9 +77,9 @@
   					
   					<a href="<%=request.getContextPath() %>/supProfil"><button class="btn" type="button">Suppression compte</button></a>
   				</form>
-					<a href="${pageContext.request.contextPath}/TestAfficherProfilServlet">Retour à l'accueil</a>
+					<a href="${pageContext.request.contextPath}/index">Retour à l'accueil</a>
 
-					<a href="${pageContext.request.contextPath}/index">Annuler</a>
+					<a href="${pageContext.request.contextPath}/afficherProfil">Annuler</a>
 
 			</div>
 </section>

@@ -12,11 +12,7 @@
 <section id="createCompte">
 		<!-- header -->
 <jsp:include page="/WEB-INF/fragments/header.jsp"></jsp:include>
-		<!-- navbar -->
-		<nav class="navbar">
-			<div>
-				<a href="<%=request.getContextPath() %>/index"> ENI-Enchères</a>
-			</div>
+
 		
 		<!-- head -->
 		<div class="head">
@@ -88,7 +84,6 @@
         		</div>
 			</form>
 		</section>
-		</nav>
 </section>	
 </body>
 </html>
