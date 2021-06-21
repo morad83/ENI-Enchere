@@ -6,14 +6,17 @@
     
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Mon profil</title>
-</head>
+
+<!-- head -->
+<jsp:include page="/WEB-INF/fragments/head.jsp"></jsp:include>	
+
 <body>
+<section id="modifierProfil">
 
+<!-- header -->
+<jsp:include page="/WEB-INF/fragments/header.jsp"></jsp:include>
 
-<h1>Mon profil</h1>
+	<h1>Mon profil</h1>
 
 	
 			<c:if test="${!empty listeCodesErreur}">
@@ -76,6 +79,6 @@
 				</form>
 					<a href="${pageContext.request.contextPath}/index">Annuler</a>
 			</div>
-			
+</section>
 </body>
 </html>

@@ -5,12 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="ISO-8859-1">
-		<title>Inscription</title>
-	</head>
-	<body>
-		
+	<!-- head -->
+<jsp:include page="/WEB-INF/fragments/head.jsp"></jsp:include>	
+
+<body>
+<section id="createCompte">
+		<!-- header -->
+<jsp:include page="/WEB-INF/fragments/header.jsp"></jsp:include>
 		<!-- navbar -->
 		<nav class="navbar">
 			<div>
@@ -85,5 +86,6 @@
 			</form>
 		</section>
 		</nav>
-	</body>
+</section>	
+</body>
 </html>

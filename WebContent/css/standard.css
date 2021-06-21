@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* font-family: 'Roboto', sans-serif; */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
+/* font-family: 'Roboto', sans-serif; italic*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+/* font-family: 'Roboto', sans-serif; bold*/
+
+/*
+	rouge foncé :color: #CC0500
+				 color:	rgba(204, 5, 0, 1)
+
+	rouge clair :color: #FF0700
+				 color: rgba(255,  7,  0, 1)
+					
+	gris clair :color: #DADADA
+				color: rgba(218,218,218,1)
+				
+	gris foncé :color: #898989
+				color: rgba(137,137,137,1)
+				
+	blanc :color: #FFF8F8
+		   color: rgba(255,248,248,1)
+		   
+	noir :color: #070000
+		  color: rgba(  7,  0,  0,1)
+*/
+
+body {
+	font-size: 100%;
+	font-family: 'Roboto', sans-serif;
+}
+
+header {
+	
+}
+
+footer {
+	
+}
+
+section {
+	background-color: #FFF8F8;
+	color: #070000;
+}
+
+article {
+	background-color: #070000;
+	color: #FFF8F8;
+	border: inset;
+	padding: 1rem;
+}
+
+div {
+	
+}
+
+form{
+	background-color: #DADADA;
+	color: #070000;
+	border: inset;
+	padding: 1rem;
+}
+
+button {
+	background-color: #FFF8F8;
+	color: #070000;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1, h2, h3{
+	font-weight: bold;
+}

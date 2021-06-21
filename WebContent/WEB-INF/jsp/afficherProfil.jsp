@@ -6,11 +6,14 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Profil</title>
-</head>
+<!-- head -->
+<jsp:include page="/WEB-INF/fragments/head.jsp"></jsp:include>	
+
 <body>
+<section id="afficherProfil">
+<!-- header -->
+<jsp:include page="/WEB-INF/fragments/header.jsp"></jsp:include>	
+
 	<div>
 	
 		<h1>ENI-Enchères</h1>
@@ -57,5 +60,6 @@
 			</c:otherwise>
 			</c:choose>
 	</div>
+</section>
 </body>
 </html>
