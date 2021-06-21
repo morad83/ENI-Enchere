@@ -14,7 +14,7 @@
 		<!-- navbar -->
 		<nav class="navbar">
 			<div>
-				<a href="<%=request.getContextPath() %>/accueil"> ENI-Enchères</a>
+				<a href="<%=request.getContextPath() %>/index"> ENI-Enchères</a>
 			</div>
 		
 		<!-- head -->
@@ -79,7 +79,7 @@
 
         			</div>
         			<div>
-        				<a href="<%=request.getContextPath() %>/accueil"><button class="btn" type="button">Annuler</button></a>
+        				<a href="<%=request.getContextPath() %>/index"><button class="btn" type="button">Annuler</button></a>
         			</div>
         		</div>
 			</form>

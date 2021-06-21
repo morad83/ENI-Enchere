@@ -115,5 +115,29 @@ System.out.println("end mng MAJutilisateur");
 		return this.utilisateurDAO.selectAllPseudo();
 	}
 	
+	public Boolean connexion(Utilisateur utilisateurCo) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+
+		Utilisateur utilisateurCoBd = recupererIds(utilisateurCo.getPseudo());
+		//////////////////
+		System.out.println(utilisateurCo.getPseudo());
+		System.out.println(utilisateurCo.getMotDePasse());
+		System.out.println(utilisateurCo.getPseudo());
+		System.out.println(utilisateurCo.getMotDePasse());
+	
+		if(utilisateurCoBd.getPseudo().equals(utilisateurCo.getPseudo())
+			&& utilisateurCoBd.getMotDePasse().equals(utilisateurCo.getMotDePasse()) 
+			) {
+			return true;
+		}
+		else {
+		  	businessException.ajouterErreur(30024);
+			throw businessException;
+		}
+	}
+	
+	public Utilisateur recupererIds(String pseudoCo) throws BusinessException {
+		return this.utilisateurDAO.selectIdsUtilisateurByPseudo(pseudoCo);
+	}
 	
 }

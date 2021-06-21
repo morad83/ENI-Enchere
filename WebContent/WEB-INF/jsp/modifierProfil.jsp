@@ -19,18 +19,13 @@
 			<c:if test="${!empty listeCodesErreur}">
 		
 			<div class="erreur">
-				<div>
-		  			<strong>Erreur!</strong>
+		  		<strong>Erreur!</strong>
 		  			
-		  			<ul>
-		  				<c:forEach var="message" items="${listeCodesErreur}">
-		  				<li>${LecteurMessage.getMessageErreur(message)}</li>
-		  				</c:forEach>
-		  			</ul>
-				</div>
-			
-				<a href="${pageContext.request.contextPath}/TestAfficherProfilServlet">Retour à l'accueil</a>
-		
+		  		<ul>
+		  			<c:forEach var="message" items="${listeCodesErreur}">
+		  			<li>${LecteurMessage.getMessageErreur(message)}</li>
+		  			</c:forEach>
+		  		</ul>
 			</div>
 			</c:if>
 	
@@ -79,7 +74,7 @@
   					
   					<input type="button" value="Supprimer mon compte">
 				</form>
-					<a href="${pageContext.request.contextPath}/TestAfficherProfilServlet">Retour à l'accueil</a>
+					<a href="${pageContext.request.contextPath}/index">Annuler</a>
 			</div>
 			
 </body>

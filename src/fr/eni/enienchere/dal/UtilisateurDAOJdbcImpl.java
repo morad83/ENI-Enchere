@@ -23,6 +23,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	private static final String UPDATE_UTILISATEUR="update UTILISATEURS set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=? where pseudo=?";
 	
+	private static final String SELECT_IDS_UTILISATEUR_BY_PSEUDO = "select pseudo, mot_de_passe from UTILISATEURS where pseudo=?";
 	
 	 @Override
 	    public Utilisateur insert(Utilisateur utilisateur) throws BusinessException, SQLException {
@@ -161,5 +162,30 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}
 	}
+	
+	@Override
+    public Utilisateur selectIdsUtilisateurByPseudo(String pseudoCo) throws BusinessException{
+		Utilisateur utilisateurCoBd= new Utilisateur();
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_IDS_UTILISATEUR_BY_PSEUDO);
+			pstmt.setString(1, pseudoCo);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				utilisateurCoBd.setPseudo(rs.getString("pseudo"));
+				utilisateurCoBd.setMotDePasse(rs.getString("mot_de_passe"));
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10014);
+			throw businessException;
+		}
+		return utilisateurCoBd;
+	}
+
 
 }
