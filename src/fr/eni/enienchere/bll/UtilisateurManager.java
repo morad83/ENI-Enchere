@@ -11,7 +11,7 @@ import fr.eni.enienchere.dal.UtilisateurDAO;
 public class UtilisateurManager {
 	
 	private  UtilisateurDAO utilisateurDAO;
-
+	
 	public UtilisateurManager(){
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
     }
@@ -27,6 +27,10 @@ public class UtilisateurManager {
     
     public List<String> listAllPseudos() throws BusinessException {
         return this.utilisateurDAO.getAllPseudos();
+    }
+    
+    public List<String> listAllEMail() throws BusinessException {
+    	return this.utilisateurDAO.getAllEmail();
     }
 
 	
@@ -138,6 +142,11 @@ System.out.println("end mng MAJutilisateur");
 	
 	public Utilisateur recupererIds(String pseudoCo) throws BusinessException {
 		return this.utilisateurDAO.selectIdsUtilisateurByPseudo(pseudoCo);
+	}
+
+	
+	public void supUtilisateur (String pseudoASup) throws BusinessException {
+		this.utilisateurDAO.delete(pseudoASup);
 	}
 	
 }
