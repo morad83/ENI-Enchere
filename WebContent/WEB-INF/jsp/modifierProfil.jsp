@@ -79,7 +79,7 @@
   				</form>
 					<a href="${pageContext.request.contextPath}/index">Retour à l'accueil</a>
 
-					<a href="${pageContext.request.contextPath}/afficherProfil">Annuler</a>
+					<a href="${pageContext.request.contextPath}/monProfil">Annuler</a>
 
 			</div>
 </section>

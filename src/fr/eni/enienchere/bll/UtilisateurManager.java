@@ -45,7 +45,9 @@ public class UtilisateurManager {
 	public void MAJUtilisateur(Utilisateur utilisateur, Utilisateur utilisateurMaj) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		List<String> listePseudos=new ArrayList<>();
+		List<String> listeEmails=new ArrayList<>();
 		listePseudos = listerPseudos();
+		listeEmails = listAllEMail();
 ////////////////////////////////////////////////
 System.out.println("start mng MAJutilisateur");
 ////////////////////////////////////////////////	
@@ -62,7 +64,19 @@ System.out.println("mng controle");
 			if(utilisateurMaj.getPseudo().trim().length()>50) {
 			  	businessException.ajouterErreur(30015);
 			}
+		}
+		if(!utilisateur.getEmail().trim().equalsIgnoreCase(utilisateurMaj.getEmail().trim())) {
+			
+			if (listeEmails.contains(utilisateurMaj.getEmail())) {
+			  	businessException.ajouterErreur(30027);
+			}
+			
+			if(utilisateurMaj.getEmail().trim().length()>20) {
+			  	businessException.ajouterErreur(30018);
+			}
 		}	
+		
+		
 		
 		if(!utilisateur.getNom().trim().equalsIgnoreCase(utilisateurMaj.getNom().trim()) & utilisateurMaj.getNom().trim().length()>30) {
 		  	businessException.ajouterErreur(30016);
@@ -72,9 +86,7 @@ System.out.println("mng controle");
 		  	businessException.ajouterErreur(30017);
 		}
 
-		if(!utilisateur.getEmail().trim().equalsIgnoreCase(utilisateurMaj.getEmail().trim()) & utilisateurMaj.getEmail().trim().length()>20) {
-		  	businessException.ajouterErreur(30018);
-		}
+
 
 		if(!utilisateur.getTelephone().trim().equalsIgnoreCase(utilisateurMaj.getTelephone().trim()) & utilisateurMaj.getNom().trim().length()>15) {
 		  	businessException.ajouterErreur(30019);
@@ -148,6 +160,14 @@ System.out.println("end mng MAJutilisateur");
 	
 	public void supUtilisateur (String pseudoASup) throws BusinessException {
 		this.utilisateurDAO.delete(pseudoASup);
+	}
+	
+	public Utilisateur selectAdresseByPseudo(String pseudo) throws BusinessException {
+		return this.utilisateurDAO.selectAdresseByPseudo(pseudo);
+	}
+	
+	public int selectNoByPseudo(String pseudo) throws BusinessException {
+		return this.utilisateurDAO.selectNoUtilisateurByPseudo(pseudo);
 	}
 	
 }
